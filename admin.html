@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | आपला शेतकरी</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#f4fff4;
+            padding:20px;
+        }
+
+        .admin-login,
+        .dashboard{
+            width:500px;
+            max-width:95%;
+            margin:40px auto;
+            background:#fff;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .dashboard{
+            display:none;
+        }
+
+        h1{
+            color:#198754;
+            text-align:center;
+            margin-bottom:25px;
+        }
+
+        label{
+            display:block;
+            margin:15px 0 8px;
+            font-weight:bold;
+        }
+
+        input,
+        select,
+        textarea,
+        button{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            font-size:16px;
+        }
+
+        button{
+            margin-top:20px;
+            background:#198754;
+            color:#fff;
+            border:none;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#146c43;
+        }
+
+        #imagePreview{
+            width:200px;
+            display:none;
+            margin:15px auto 0;
+            border-radius:10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-login" id="loginBox">
+
+        <h1>🔐 Admin Login</h1>
+
+        <input type="text" id="username" placeholder="Username">
+
+        <input type="password" id="password" placeholder="Password">
+
+        <button onclick="login()">Login</button>
+
+    </div>
+
+    <div class="dashboard" id="dashboard">
+
+        <h1>🌾 Admin Dashboard</h1>
+
+        <label>Product Name</label>
+        <input type="text" id="productName" placeholder="उदा. टोमॅटो">
+
+        <label>Price (₹)</label>
+        <input type="number" id="productPrice" placeholder="उदा. 20">
+
+        <label>Status</label>
+        <select id="productStatus">
+            <option>Available</option>
+            <option>Out Of Stock</option>
+        </select>
+
+        <label>Running Headline</label>
+        <textarea id="headline" rows="3"
+            placeholder="आज टोमॅटो, भेंडी आणि मिरची उपलब्ध आहे"></textarea>
+
+        <label>Product Photo</label>
+        <input type="file" id="productImage" accept="image/*">
+
+        <img id="imagePreview">
+
+        <button onclick="saveProduct()">
+            Save Changes
+        </button>
+
+    </div>
+
+<script>
+
+const USERNAME = "admin";
+const PASSWORD = "admin123";
+
+const CLOUD_NAME = "daaglsrnd";
+const UPLOAD_PRESET = "apla_shetkari_upload";
+
+function login(){
+
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+
+    if(user === USERNAME && pass === PASSWORD){
+
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+
+    }else{
+
+        alert("Wrong Username or Password");
+
+    }
+}
+
+/* Image Preview */
+
+const imageInput = document.getElementById("productImage");
+const imagePreview = document.getElementById("imagePreview");
+
+imageInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(file){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = "block";
+
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+});
+
+/* Upload to Cloudinary */
+
+async function uploadImage(){
+
+    const file = imageInput.files[0];
+
+    if(!file){
+        alert("कृपया फोटो निवडा");
+        return null;
+    }
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    try{
+
+        const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        const data = await response.json();
+
+        return data.secure_url;
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("फोटो Upload झाला नाही");
+
+        return null;
+    }
+}
+
+/* Save Product */
+
+async function saveProduct() {
+
+    const imageUrl = await uploadImage();
+
+    if (!imageUrl) return;
+
+    const product = {
+        name: document.getElementById("productName").value,
+        price: document.getElementById("productPrice").value,
+        status: document.getElementById("productStatus").value,
+        headline: document.getElementById("headline").value,
+        image: imageUrl
+    };
+
+    try {
+
+        const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbwXgKn5ybby9qqj996vsCceM7v2I93gQHw8ga3Ev3BRIpGG3f44NWxtfYZWP_l32BlS/exec",
+            {
+                method: "POST",
+                body: JSON.stringify(product)
+            }
+        );
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            alert("✅ Product Google Sheet मध्ये Save झाला!");
+
+            document.getElementById("productName").value = "";
+            document.getElementById("productPrice").value = "";
+            document.getElementById("headline").value = "";
+            document.getElementById("productImage").value = "";
+
+            imagePreview.style.display = "none";
+
+        } else {
+
+            alert("❌ Data Save झाला नाही.");
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+        alert("❌ Google Sheet शी कनेक्ट होत नाही.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
