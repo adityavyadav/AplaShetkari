@@ -1,125 +1,153 @@
+
 <!DOCTYPE html>
 <html lang="mr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>आपला शेतकरी</title>
+
+    <title>आपला शेतकरी | Farm to Home</title>
+    <meta name="description" content="आपला शेतकरी - ताजा भाजीपाला आणि शेतातील उत्पादने थेट शेतातून तुमच्या घरापर्यंत.">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Navbar -->
+    <!-- Navigation -->
     <nav class="navbar">
-        <div class="logo">🌾 आपला शेतकरी</div>
+        <a href="index.html" class="logo">🌾 आपला शेतकरी</a>
 
         <ul class="nav-links">
             <li><a href="index.html">मुख्यपृष्ठ</a></li>
             <li><a href="products.html">भाजीपाला</a></li>
-            <li><a href="#about">माहिती</a></li>
+            <li><a href="#about">आमच्याबद्दल</a></li>
             <li><a href="#contact">संपर्क</a></li>
             <li><a href="admin.html">Admin</a></li>
         </ul>
     </nav>
 
-    <!-- Running Headline -->
+    <!-- Availability Headline -->
     <div class="headline">
-        <marquee>
-            🥬 आज उपलब्ध : टोमॅटो, भेंडी, वांगी, मिरची | शेतातून थेट तुमच्या घरापर्यंत
-        </marquee>
+        <p>🌱 शेतातून थेट तुमच्या घरापर्यंत | आजचे उपलब्ध उत्पादन पाहण्यासाठी भाजीपाला विभागाला भेट द्या.</p>
     </div>
 
     <!-- Hero Section -->
-    <section class="hero">
-
+    <header class="hero">
         <div class="hero-content">
-            <h1>🌾 आपला शेतकरी</h1>
+            <span class="hero-tag">🌿 शेतकरी आणि ग्राहक यांना जोडणारा उपक्रम</span>
+
+            <h1>आपला शेतकरी</h1>
+
+            <h2>ताजेपणा शेताचा, विश्वास तुमचा!</h2>
 
             <p>
-                ताजा, दर्जेदार आणि सेंद्रिय भाजीपाला
-                थेट शेतातून तुमच्या घरापर्यंत
+                शेतातील ताजा भाजीपाला आणि शेती उत्पादने
+                ग्राहकांपर्यंत पोहोचवण्याचा आमचा प्रयत्न.
+                शेतकऱ्यांना बाजारपेठ आणि ग्राहकांना उत्पादनांची
+                माहिती एकाच ठिकाणी मिळवून देणे हे आमचे उद्दिष्ट आहे.
             </p>
 
-            <a href="products.html" class="btn">
-                उपलब्ध भाजीपाला पहा
-            </a>
+            <div class="hero-buttons">
+                <a href="products.html" class="btn">उत्पादने पहा →</a>
+                <a href="#about" class="btn btn-outline">आमच्याबद्दल</a>
+            </div>
         </div>
+    </header>
 
-    </section>
-
-    <!-- About Organic Farming -->
-    <section id="about" class="about">
-
-        <h2>सेंद्रिय शेती म्हणजे काय?</h2>
-
-        <p>
-            सेंद्रिय शेती ही रासायनिक खतांचा कमी वापर करून
-            नैसर्गिक पद्धतीने केली जाणारी शेती आहे.
-            यामुळे आरोग्यदायी अन्न मिळते आणि जमिनीची सुपीकता टिकून राहते.
-        </p>
+    <!-- Project Introduction -->
+    <section class="about" id="about">
+        <div class="section-heading">
+            <span>OUR PURPOSE</span>
+            <h2>Farm-to-Home म्हणजे काय?</h2>
+            <p>
+                शेतकऱ्यांनी उत्पादित केलेला माल आणि ग्राहक यांच्यातील
+                अंतर कमी करण्यासाठी तयार केलेली ऑनलाइन शॉपिंग वेबसाइट.
+            </p>
+        </div>
 
         <div class="features">
+            <article class="feature-box">
+                <div class="feature-icon">🌱</div>
+                <h3>शेतीची माहिती</h3>
+                <p>शेती उत्पादने आणि नैसर्गिक शेती पद्धतींबद्दल माहिती.</p>
+            </article>
 
-            <div class="feature-box">
-                <h3>🌱 आरोग्यदायी उत्पादन</h3>
-                <p>रासायनिक अवशेष कमी असलेला भाजीपाला.</p>
-            </div>
+            <article class="feature-box">
+                <div class="feature-icon">🚜</div>
+                <h3>शेतकऱ्यांना मदत</h3>
+                <p>शेतकऱ्यांना त्यांच्या उत्पादनांची माहिती ग्राहकांपर्यंत पोहोचवण्याची संधी.</p>
+            </article>
 
-            <div class="feature-box">
-                <h3>🌍 पर्यावरणपूरक</h3>
-                <p>नैसर्गिक साधनसंपत्तीचे संरक्षण.</p>
-            </div>
-
-            <div class="feature-box">
-                <h3>🚜 थेट शेतकऱ्याकडून</h3>
-                <p>मध्यस्थांशिवाय ताजा माल.</p>
-            </div>
-
+            <article class="feature-box">
+                <div class="feature-icon">🛒</div>
+                <h3>सुलभ खरेदी</h3>
+                <p>उपलब्ध उत्पादने, त्यांचे दर आणि माहिती एकाच ठिकाणी पाहण्याची सुविधा.</p>
+            </article>
         </div>
-
     </section>
 
-    <!-- Why Choose Us -->
+    <!-- Organic Farming -->
     <section class="why-us">
-
-        <h2>आमची वैशिष्ट्ये</h2>
-
-        <div class="features">
-
-            <div class="feature-box">
-                <h3>🥬 ताजा भाजीपाला</h3>
-                <p>दररोज शेतातून काढलेला माल.</p>
-            </div>
-
-            <div class="feature-box">
-                <h3>💰 योग्य दर</h3>
-                <p>बाजारभावाप्रमाणे योग्य किंमत.</p>
-            </div>
-
-            <div class="feature-box">
-                <h3>📦 सोपी ऑर्डर</h3>
-                <p>WhatsApp वरून थेट ऑर्डर.</p>
-            </div>
-
+        <div class="section-heading">
+            <span>ORGANIC FARMING</span>
+            <h2>सेंद्रिय शेतीचे महत्त्व</h2>
+            <p>
+                सेंद्रिय शेतीमध्ये नैसर्गिक पद्धती आणि संसाधनांच्या
+                योग्य वापरावर भर दिला जातो.
+            </p>
         </div>
 
+        <div class="features">
+            <article class="feature-box">
+                <div class="feature-icon">🌿</div>
+                <h3>नैसर्गिक पद्धती</h3>
+                <p>जमिनीचे आरोग्य आणि नैसर्गिक संसाधनांचे जतन करण्यावर भर.</p>
+            </article>
+
+            <article class="feature-box">
+                <div class="feature-icon">🌍</div>
+                <h3>पर्यावरण संवर्धन</h3>
+                <p>शेतीमध्ये पर्यावरणपूरक पद्धतींचा वापर करण्यास प्रोत्साहन.</p>
+            </article>
+
+            <article class="feature-box">
+                <div class="feature-icon">🤝</div>
+                <h3>थेट संपर्क</h3>
+                <p>शेतकरी आणि ग्राहक यांच्यातील संपर्क अधिक सोपा करण्याचा प्रयत्न.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="shop-cta">
+        <h2>आजची उपलब्ध उत्पादने पाहिली का?</h2>
+        <p>उत्पादनांची माहिती आणि दर पाहण्यासाठी आमच्या Products Page ला भेट द्या.</p>
+        <a href="products.html" class="btn">भाजीपाला पहा →</a>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="contact">
-
-        <h2>संपर्क करा</h2>
+    <section class="contact" id="contact">
+        <div class="section-heading">
+            <span>GET IN TOUCH</span>
+            <h2>आमच्याशी संपर्क साधा</h2>
+            <p>आपल्या प्रश्नांसाठी किंवा उत्पादनांविषयी अधिक माहितीसाठी संपर्क करा.</p>
+        </div>
 
         <p>📞 9309295969</p>
 
-        <a href="https://wa.me/919309295969" target="_blank" class="btn">
+        <a
+            href="https://wa.me/919309295969"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+        >
             WhatsApp वर संपर्क करा
         </a>
-
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 आपला शेतकरी | All Rights Reserved</p>
+        <p>© 2026 आपला शेतकरी | Farm-to-Home Shopping Website</p>
+        <p>शेतकऱ्यांकडून ग्राहकांपर्यंत — विश्वासाने!</p>
     </footer>
 
 </body>
