@@ -1,166 +1,387 @@
+
 <!DOCTYPE html>
 <html lang="mr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>भाजीपाला | आपला शेतकरी</title>
+
+    <title>शेती उत्पादने | आपला शेतकरी</title>
+    <meta name="description" content="आपला शेतकरी येथे उपलब्ध भाजीपाला आणि शेती उत्पादनांचे दर व उपलब्धता पहा.">
+
+    <link rel="stylesheet" href="style.css">
 
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial,sans-serif;
+        .products-header {
+            background: #15552f;
+            color: white;
+            padding: 48px 6% 42px;
+            text-align: center;
         }
 
-        body{
-            background:#f5f5f5;
+        .products-header h1 {
+            font-size: clamp(28px, 4vw, 42px);
+            margin-bottom: 10px;
         }
 
-        header{
-            background:#198754;
-            color:white;
-            padding:20px;
-            text-align:center;
+        .products-header p {
+            color: #e3efe4;
+            max-width: 650px;
+            margin: auto;
         }
 
-        nav{
-            margin-top:10px;
+        .products-toolbar {
+            width: 86%;
+            max-width: 1250px;
+            margin: 30px auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        nav a{
-            color:white;
-            text-decoration:none;
-            margin:0 15px;
-            font-weight:bold;
+        .products-toolbar h2 {
+            color: #15552f;
+            font-size: 24px;
         }
 
-        .products{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:20px;
-            padding:30px;
+        .products-toolbar input {
+            width: min(100%, 320px);
+            padding: 12px 15px;
+            border: 1px solid #d7e2d5;
+            border-radius: 9px;
+            background: white;
         }
 
-        .card{
-            background:white;
-            border-radius:15px;
-            overflow:hidden;
-            box-shadow:0 5px 15px rgba(0,0,0,0.1);
-            text-align:center;
-            padding-bottom:20px;
+        .products-status {
+            width: 86%;
+            max-width: 1250px;
+            margin: 20px auto 0;
+            color: #667568;
+            text-align: center;
         }
 
-        .card img{
-            width:100%;
-            height:220px;
-            object-fit:cover;
+        .products .card {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 0;
         }
 
-        .card h3{
-            margin:15px 0 10px;
+        .product-image-wrap {
+            position: relative;
+            background: #eaf5e9;
         }
 
-        .card p{
-            margin:8px 0;
+        .product-image-wrap img {
+            display: block;
+            width: 100%;
+            height: 225px;
+            object-fit: cover;
         }
 
-        .order-btn{
-            display:inline-block;
-            margin-top:15px;
-            padding:12px 20px;
-            background:#198754;
-            color:white;
-            text-decoration:none;
-            border-radius:8px;
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 0 18px 18px;
         }
 
-        .not-available{
-            background:#888;
-            pointer-events:none;
+        .product-info h3 {
+            padding: 16px 0 5px;
+            margin: 0;
+        }
+
+        .product-info .price {
+            color: #15552f;
+            font-size: 21px;
+            font-weight: 700;
+            padding: 4px 0 10px;
+        }
+
+        .product-info .availability {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .availability.available {
+            color: #237a45;
+        }
+
+        .availability.unavailable {
+            color: #b42318;
+        }
+
+        .product-info .order-btn {
+            display: block;
+            margin-top: auto;
+            padding: 12px 10px;
+            text-align: center;
+            background: #237a45;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .product-info .order-btn:hover {
+            background: #15552f;
+        }
+
+        .product-info .order-btn.not-available {
+            background: #8b928c;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .product-message {
+            width: 86%;
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 22px;
+            border-radius: 12px;
+            background: white;
+            text-align: center;
+            color: #667568;
+        }
+
+        .products-footer-link {
+            text-align: center;
+            padding: 10px 20px 45px;
+        }
+
+        @media (max-width: 600px) {
+            .products-toolbar {
+                width: 90%;
+                align-items: stretch;
+            }
+
+            .products-toolbar input {
+                width: 100%;
+            }
+
+            .products-status {
+                width: 90%;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<header>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🌾 आपला शेतकरी</a>
 
-    <h1>🌾 आपला शेतकरी</h1>
-
-    <nav>
-        <a href="index.html">मुख्यपृष्ठ</a>
-        <a href="products.html">भाजीपाला</a>
+        <ul class="nav-links">
+            <li><a href="index.html">मुख्यपृष्ठ</a></li>
+            <li><a href="products.html">भाजीपाला</a></li>
+            <li><a href="index.html#about">आमच्याबद्दल</a></li>
+            <li><a href="index.html#contact">संपर्क</a></li>
+        </ul>
     </nav>
 
-</header>
+    <header class="products-header">
+        <h1>🌱 आमची शेती उत्पादने</h1>
+        <p>
+            उपलब्ध उत्पादनांचे दर आणि साठा पहा.
+            आपल्या आवडीचे उत्पादन WhatsApp वरून ऑर्डर करा.
+        </p>
+    </header>
 
-<section class="products" id="productsContainer">
+    <div class="products-toolbar">
+        <h2>उपलब्ध उत्पादने</h2>
 
-</section>
+        <input
+            type="search"
+            id="productSearch"
+            placeholder="उत्पादन शोधा..."
+            aria-label="उत्पादन शोधा"
+        >
+    </div>
 
-<script>
+    <p id="productsStatus" class="products-status" role="status">
+        उत्पादने लोड होत आहेत...
+    </p>
 
-const API_URL = "https://script.google.com/macros/s/AKfycbwXgKn5ybby9qqj996vsCceM7v2I93gQHw8ga3Ev3BRIpGG3f44NWxtfYZWP_l32BlS/exec";
+    <section class="products" id="productsContainer"></section>
 
-async function loadProducts(){
+    <div class="products-footer-link">
+        <a href="index.html" class="btn">← मुख्यपृष्ठावर जा</a>
+    </div>
 
-    try{
+    <footer>
+        <p>© 2026 आपला शेतकरी | Farm-to-Home Shopping Website</p>
+        <p>शेतकऱ्यांकडून ग्राहकांपर्यंत — विश्वासाने!</p>
+    </footer>
 
-        const response = await fetch(API_URL);
-        const products = await response.json();
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbwXgKn5ybby9qqj996vsCceM7v2I93gQHw8ga3Ev3BRIpGG3f44NWxtfYZWP_l32BlS/exec";
 
         const container = document.getElementById("productsContainer");
+        const statusMessage = document.getElementById("productsStatus");
+        const searchInput = document.getElementById("productSearch");
 
-        container.innerHTML = "";
+        let allProducts = [];
 
-        products.reverse().forEach(product => {
+        function makeElement(tag, className, text) {
+            const element = document.createElement(tag);
+            element.className = className;
+            element.textContent = text;
+            return element;
+        }
 
-            const available = product.Status === "Available";
+        function renderProducts(searchText = "") {
+            container.replaceChildren();
 
-            container.innerHTML += `
+            const query = searchText.trim().toLocaleLowerCase("mr");
 
-                <div class="card">
+            const filtered = allProducts.filter(product => {
+                const name = String(product.Name || "").toLocaleLowerCase("mr");
+                return name.includes(query);
+            });
 
-                    <img src="${product.Image}" alt="${product.Name}">
+            if (filtered.length === 0) {
+                statusMessage.textContent = allProducts.length
+                    ? "या नावाचे कोणतेही उत्पादन सापडले नाही."
+                    : "सध्या कोणतीही उत्पादने उपलब्ध नाहीत.";
+                return;
+            }
 
-                    <h3>${product.Name}</h3>
+            statusMessage.textContent =
+                "एकूण " + filtered.length + " उत्पादने दाखवली आहेत.";
 
-                    <p><strong>₹${product.Price} / kg</strong></p>
+            filtered.forEach(product => {
+                const name = String(product.Name || "शेती उत्पादन");
+                const price = String(product.Price ?? "दर उपलब्ध नाही");
+                const imageUrl = String(product.Image || "").trim();
 
-                    <p style="color:${available ? 'green' : 'red'};font-weight:bold;">
+                const available =
+                    String(product.Status || "").trim().toLowerCase()
+                    === "available";
 
-                        ${available ? '✅ Available' : '❌ Out Of Stock'}
+                const card = document.createElement("article");
+                card.className = "card";
 
-                    </p>
+                const imageWrap = document.createElement("div");
+                imageWrap.className = "product-image-wrap";
 
-                    <a
-                        class="order-btn ${available ? '' : 'not-available'}"
-                        href="https://wa.me/919309295969?text=मला ${product.Name} ऑर्डर करायची आहे"
-                        target="_blank">
+                const img = document.createElement("img");
+                img.alt = name;
+                img.loading = "lazy";
 
-                        WhatsApp वर ऑर्डर करा
+                if (imageUrl) {
+                    try {
+                        const parsedUrl = new URL(imageUrl);
 
-                    </a>
+                        if (parsedUrl.protocol === "https:" ||
+                            parsedUrl.protocol === "http:") {
+                            img.src = parsedUrl.href;
+                        } else {
+                            img.alt = name + " (फोटो उपलब्ध नाही)";
+                        }
+                    } catch {
+                        img.alt = name + " (फोटो उपलब्ध नाही)";
+                    }
+                }
 
-                </div>
+                img.addEventListener("error", () => {
+                    img.removeAttribute("src");
+                    img.alt = name + " - फोटो उपलब्ध नाही";
+                });
 
-            `;
+                imageWrap.appendChild(img);
 
+                const info = document.createElement("div");
+                info.className = "product-info";
+
+                info.appendChild(makeElement("h3", "", name));
+
+                const priceElement = makeElement(
+                    "p",
+                    "price",
+                    price === "दर उपलब्ध नाही"
+                        ? price
+                        : "₹" + price + " / kg"
+                );
+                info.appendChild(priceElement);
+
+                const availability = makeElement(
+                    "p",
+                    "availability " + (available ? "available" : "unavailable"),
+                    available ? "✓ उपलब्ध आहे" : "✕ सध्या उपलब्ध नाही"
+                );
+                info.appendChild(availability);
+
+                const orderLink = document.createElement("a");
+                orderLink.className = "order-btn";
+
+                if (available) {
+                    orderLink.href =
+                        "https://wa.me/919309295969?text=" +
+                        encodeURIComponent(
+                            "नमस्कार, मला " + name +
+                            " ऑर्डर करायची आहे. कृपया उपलब्धता आणि दर निश्चित करा."
+                        );
+
+                    orderLink.target = "_blank";
+                    orderLink.rel = "noopener noreferrer";
+                    orderLink.textContent = "WhatsApp वर ऑर्डर करा";
+                } else {
+                    orderLink.classList.add("not-available");
+                    orderLink.textContent = "सध्या उपलब्ध नाही";
+                    orderLink.setAttribute("aria-disabled", "true");
+                    orderLink.removeAttribute("href");
+                }
+
+                info.appendChild(orderLink);
+                card.append(imageWrap, info);
+                container.appendChild(card);
+            });
+        }
+
+        async function loadProducts() {
+            statusMessage.textContent = "उत्पादने लोड होत आहेत...";
+
+            try {
+                const response = await fetch(API_URL);
+
+                if (!response.ok) {
+                    throw new Error("Server response: " + response.status);
+                }
+
+                const products = await response.json();
+
+                if (!Array.isArray(products)) {
+                    throw new Error("Products data योग्य स्वरूपात नाही.");
+                }
+
+                allProducts = products.slice().reverse();
+
+                renderProducts(searchInput.value);
+            } catch (error) {
+                console.error("Products load error:", error);
+                container.replaceChildren();
+                statusMessage.textContent =
+                    "उत्पादने लोड झाली नाहीत. इंटरनेट आणि Google Sheets connection तपासून पुन्हा प्रयत्न करा.";
+
+                const retryButton = makeElement("button", "btn", "पुन्हा प्रयत्न करा");
+                retryButton.type = "button";
+                retryButton.addEventListener("click", loadProducts);
+
+                const message = document.createElement("div");
+                message.className = "product-message";
+                message.appendChild(retryButton);
+                container.appendChild(message);
+            }
+        }
+
+        searchInput.addEventListener("input", () => {
+            renderProducts(searchInput.value);
         });
 
-    }catch(error){
-
-        console.error(error);
-        alert("Products लोड झाले नाहीत.");
-
-    }
-
-}
-
-loadProducts();
-
-</script>
+        loadProducts();
+    </script>
 
 </body>
 </html>
